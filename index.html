@@ -8,13 +8,41 @@
     <title>Nico´s site</title>
 </head>
 <style>
-body {
-  background-color: #393E46;
+div {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  position: relative;
+  animation-name: example;
+  animation-duration: 8s;
+  animation-iteration-count: 10;
 }
 
 h1 {
+  animation-name: heading_animation;
   color: #00ADB5;
   text-align: center;
+  animation-duration: 8s;
+  animation-iteration-count: 10;
+}
+
+@keyframes example {
+  0%   {background-color:red; left:-100px; top:0px;}
+  25%  {background-color:yellow; left:0px; top:0px;}
+  50%  {background-color:blue; left:100px; top:0px;}
+  75%  {background-color:green; left:0px; top:0px;}
+  100% {background-color:red; left:-100px; top:0px;}
+}
+
+@keyframes heading_animation {
+  0%   {color:red;}
+  25%  {color:yellow;}
+  50%  {color:blue;}
+  75%  {olor:green;}
+  100% {color:red;}
+}
+body {
+  background-color: #393E46;
 }
 
 p {
@@ -32,6 +60,7 @@ color: #B83B5E;
 <p>Python & Swift</p>
 <p>(obviously not HTML)</p>
 <a href="https://github.com/Nicolas-Py">GitHub</a>
+<div></div>
 </center>
 </body>
 </html>
