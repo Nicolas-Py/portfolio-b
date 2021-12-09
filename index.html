@@ -10,29 +10,38 @@
 <style>
 body {
   background-color: #393E46;
+  text-align: center;
 }
 
 
 h1 {
   color: #00ADB5;
-  text-align: center;
-}
+  animation-name: heading_animation;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
 
+}
+@keyframes heading_animation {
+  0% {color: #ffbe0b;}
+  25% {color: #fb5607;}
+  50% {color: #ff006e;}
+  75% {color: #8338ec;}
+  80% {color: #3a86ff;}
+  100% {color: #ffbe0b;}
+}
 p {
   color: #EEEEEE;
-  font-family: verdana;
 }
 a {
-color: #B83B5E;
+  text-align: center;
+  color: #B83B5E;
 
 }
 </style>
 <body>
-<center>
 <h1 id="name"> Nicolas Mallinckrodt</h1>
 <p>Python & Swift</p>
 <p>(obviously not HTML)</p>
 <a href="https://github.com/Nicolas-Py">GitHub</a>
-</center>
 </body>
 </html>
