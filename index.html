@@ -1,57 +1,95 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <title>Nico</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Development">
-    <meta name="keywords" content="Nicolas Mallinckrodt">
-    <meta name="author" content="Nicolas Mallinckrodt">
-    
+    <title>Stacked Elements</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://use.typekit.net/jlz2zhe.css">
 </head>
-<style>
-body {
-  background-color: #393E46;
-  text-align: center;
-}
-.layout {
-padding: 50px 0 0;
-}
-h1 {
-    color: #EEEEEE;
-}
-#name {
-  color: #00ADB5;
-  animation-name: heading_animation;
-  animation-duration: 20s;
-  animation-iteration-count: 100;
-}
-@keyframes heading_animation {
-  0% {color: #ffbe0b;}
-  20% {color: #fb5607;}
-  40% {color: #ff006e;}
-  60% {color: #8338ec;}
-  80% {color: #3a86ff;}
-  100% {color: #ffbe0b;}
-}
-p {
-  color: #EEEEEE;
-  vertical-align: middle;
-}
-a {
-  color: #B83B5E;
-  vertical-align: middle;
-
-}
-</style>
 <body>
-<div class="layout">
-<h1> <span id="name">Nicolas</span> Mallinckrodt</h1>
-<p>Python, JS & Swift</p>
-<p>(obviously not HTML)</p>
-<p>kinda familiar with GCP</p>
-<a href="https://github.com/Nicolas-Py">GitHub</a>
+
+<div class="header">
+    <div class="text-block">
+        <div class="top-text">
+            <span class="name">nicolas</span>
+            <span class="time" id="time">12:16</span>
+        </div>
+        <div class="divider"></div>
+        <div class="bottom-text">
+            <span class="inverted name">mallinckrodt</span>
+            <span class="inverted date" id="date">26.08.2024</span>
+        </div>
+    </div>
 </div>
+<div class="dot-container">
+    <div class="trail">
+        <div class="dot"></div>
+        <span class="text">Project #1</span>
+    </div>
+</div>
+<div class="dot-container">
+    <div class="trail">
+        <div class="dot"></div>
+        <span class="text">Project #2</span>
+    </div>
+</div>
+<div class="dot-container">
+    <div class="trail">
+        <div class="dot"></div>
+        <span class="text">Project #3</span>
+    </div>
+</div>
+<script>
+    function updateTime() {
+        // Get current date and time
+        const now = new Date();
+
+        // Format date as dd.mm.yyyy
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+        const year = now.getFullYear();
+        const formattedDate = `${day}.${month}.${year}`;
+
+        // Format time as HH:MM:SS GMT+0200 (or other timezone)
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const timezoneOffset = now.getTimezoneOffset();
+        const timezoneHours = String(Math.abs(timezoneOffset) / 60).padStart(2, '0');
+        const timezoneMinutes = String(Math.abs(timezoneOffset) % 60).padStart(2, '0');
+        const timezoneSign = timezoneOffset > 0 ? '-' : '+';
+        const formattedTime = `${hours}:${minutes}:${seconds} GMT${timezoneSign}${timezoneHours}${timezoneMinutes}`;
+
+        // Insert formatted date and time into HTML
+        document.getElementById("date").innerHTML = formattedDate;
+        document.getElementById("time").innerHTML = formattedTime;
+    }
+
+    // Update time every second
+    setInterval(updateTime, 1000);
+
+    // Initial call
+    updateTime();
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const textElements = document.querySelectorAll('.text');
+
+        textElements.forEach(textElement => {
+            const text = textElement.textContent;
+            textElement.innerHTML = ''; // Clear the text content
+
+            // Wrap each letter in a span and append to the .text element
+            text.split('').forEach((letter, index) => {
+                const span = document.createElement('span');
+                span.textContent = letter;
+                span.style.transitionDelay = `${index * 0.05}s`;
+                textElement.appendChild(span);
+            });
+        });
+    });
+
+</script>
 </body>
 </html>
