@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stacked Elements</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Nicolas Mallinckrodt</title>
+    <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://use.typekit.net/jlz2zhe.css">
 </head>
 <body>
-
 <div class="header">
     <div class="text-block">
         <div class="top-text">
@@ -26,7 +25,9 @@
     <div class="trail">
         <div class="dot"></div>
         <span class="text">Project #1</span>
+        <div class="dot-wrapper"></div>
     </div>
+
 </div>
 <div class="dot-container">
     <div class="trail">
@@ -73,6 +74,59 @@
     updateTime();
 </script>
 <script>
+    document.querySelectorAll('.trail').forEach((trail) => {
+        trail.addEventListener('click', function() {
+            // Add a class to keep the dot in its final position
+            this.classList.add('dot-stuck');
+
+            // Calculate the final position of the red dot
+            const dot = this.querySelector('.dot');
+            const dotRect = dot.getBoundingClientRect();
+
+            // Define sizes for the new dots
+            const sizes = [400, 1200, 2000, 2800];
+            const newDots = []; // Array to keep track of new dots
+
+            sizes.forEach((size, index) => {
+                const newDot = document.createElement('div');
+                newDot.classList.add('new-dot', `new-dot-${index + 1}`);
+                newDot.style.position = 'absolute';
+                newDot.style.width = `${size}px`;
+                newDot.style.height = `${size}px`;
+
+                // Position the new dots based on the final position of the red dot
+                newDot.style.left = `${dotRect.left + dotRect.width / 2 - size / 2}px`;
+                newDot.style.top = `${dotRect.top + dotRect.height / 2 - size / 2}px`;
+
+                // Delay the appearance of each dot
+                setTimeout(() => {
+                    document.body.appendChild(newDot);
+                    newDots.push(newDot); // Add dot to the array
+                }, index * 200);
+            });
+
+            // After all dots have appeared, change their colors and then redirect
+            setTimeout(() => {
+                newDots.forEach((dot, index) => {
+                    setTimeout(() => {
+                        dot.style.backgroundColor = "#056CC1"; // Change color of each dot
+                    }, index * 200);
+                });
+
+                // Redirect to a new page after colors have changed
+                setTimeout(() => {
+                    window.location.href = 'project.html';
+                }, newDots.length * 200 + 500); // Extra delay before redirecting
+
+                setTimeout(() => {
+                    newDots.forEach(dot => dot.remove());
+                    document.querySelectorAll('.dot-stuck').forEach(dot => dot.classList.remove('dot-stuck'));
+                }, sizes.length * 200 + 1000); // this is al little fucked 
+            }, sizes.length * 200 + 200); // Wait until all dots have appeared
+
+
+        });
+    });
     document.addEventListener('DOMContentLoaded', () => {
         const textElements = document.querySelectorAll('.text');
 
@@ -89,7 +143,6 @@
             });
         });
     });
-
 </script>
 </body>
 </html>

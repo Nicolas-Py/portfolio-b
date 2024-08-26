@@ -14,6 +14,7 @@ body {
     width: 1200px;
     padding: 20px;
     margin-bottom: 20px;
+    z-index: 99;
 }
 
 .text-block {
@@ -101,4 +102,41 @@ body {
 .trail:not(:hover) .text span {
     visibility: hidden;
     transform: translateY(20px); /* Slide back down */
+}
+
+
+
+
+.dot-stuck {
+    background-color: transparent
+}
+.dot-stuck .dot {
+    background-color: transparent
+}
+
+.new-dot {
+    position: absolute;
+    background-color: #d1403f;
+    border-radius: 50%;
+    transition: opacity 0.4s ease;
+}
+
+.new-dot-1 {
+    z-index: 5;
+    background-color: #d1403f;
+}
+
+.new-dot-2 {
+    z-index: 4;
+    background-color: #e0a347;
+}
+
+.new-dot-3 {
+    z-index: 3;
+    background-color: #d1403f;
+}
+
+.new-dot-4 {
+    z-index: 2;
+    background-color: #e0a347;
 }
