@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Futura, reross-quadratic, sans-serif;
-    background-color: #e0a347;
+    background-color: #F2AB39;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -128,7 +128,7 @@ body {
 
 .new-dot-2 {
     z-index: 4;
-    background-color: #e0a347;
+    background-color: #F2AB39;
 }
 
 .new-dot-3 {
@@ -138,5 +138,15 @@ body {
 
 .new-dot-4 {
     z-index: 2;
-    background-color: #e0a347;
+    background-color: #F2AB39;
+}
+
+.new-dot-5 {
+    z-index: 1;
+    background-color: #d1403f;
+}
+
+.new-dot-6 {
+    z-index: 0;
+    background-color: #F2AB39;
 }
