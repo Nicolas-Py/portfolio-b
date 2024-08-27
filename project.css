@@ -94,7 +94,7 @@ a {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    transition: transform 2s ease;
+    transition: transform 0.5s linear;
 }
 .yellow {
     background-color: #e0a347;
