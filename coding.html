@@ -22,7 +22,12 @@
     </div>
 </div>
 <div class="container">
-    <h1>Project #1</h1>
+    <div class="heading-container">
+        <div class="dot" id="nicolas-py.github.io/personal_site/">
+            <span class="spinning-text">GO BACK</span>
+        </div>
+        <h1>Project #1</h1>
+    </div>
     <p>
         lorem ipsum odor amet, consectetuer
         adipiscing elit. aliquet est per mauris
@@ -36,13 +41,69 @@
         euismod, ad mus. volutpat at faucibus
         varius semper, felis nulla ridiculus.
         senectus nisi non ut efficitur iaculis
-        penatibus cursus neque torquent.    </p>
+        penatibus cursus neque torquent.
+    </p>
     <div class="dots">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+        <div class="dot">
+            <span class="spinning-text">Spinning Text</span>
+        </div>
+        <div class="dot">
+            <span class="spinning-text">Spinning Text</span>
+        </div>
+        <div class="dot">
+            <span class="spinning-text">Spinning Text</span>
+        </div>
+        <div class="dot">
+            <span class="spinning-text">Spinning Text</span>
+        </div>
     </div>
 </div>
 </body>
+<script>
+    function updateTime() {
+        // Get current date and time
+        const now = new Date();
+
+        // Format date as dd.mm.yyyy
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+        const year = now.getFullYear();
+        const formattedDate = `${day}.${month}.${year}`;
+
+        // Format time as HH:MM:SS GMT+0200 (or other timezone)
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const timezoneOffset = now.getTimezoneOffset();
+        const timezoneHours = String(Math.abs(timezoneOffset) / 60).padStart(2, '0');
+        const timezoneMinutes = String(Math.abs(timezoneOffset) % 60).padStart(2, '0');
+        const timezoneSign = timezoneOffset > 0 ? '-' : '+';
+        const formattedTime = `${hours}:${minutes}:${seconds} GMT${timezoneSign}${timezoneHours}${timezoneMinutes}`;
+
+        // Insert formatted date and time into HTML
+        document.getElementById("date").innerHTML = formattedDate;
+        document.getElementById("time").innerHTML = formattedTime;
+    }
+
+    // Update time every second
+    setInterval(updateTime, 1000);
+
+    // Initial call
+    updateTime();
+</script>
+<script>
+    document.querySelectorAll('.dot').forEach((dot) => {
+        dot.addEventListener('click', function() {
+            this.classList.add('dot-big')
+            setTimeout(() => {
+                const route = this.id;
+                const baseUrl = 'https://';
+                window.location.href = `${baseUrl}${route}`;
+                setTimeout(() => {
+                    this.classList.remove('dot-big')
+                }, 100);
+            }, 700);
+        });
+    });
+</script>
 </html>
