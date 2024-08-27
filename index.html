@@ -21,12 +21,12 @@
         </div>
     </div>
 </div>
+<section class="main-section">
 <div class="dot-container">
-    <div class="trail" id="coding">
+    <div class="trail" url="coding">
         <div class="dot"></div>
         <span class="text">Coding</span>
     </div>
-
 </div>
 <div class="dot-container">
     <div class="trail">
@@ -40,6 +40,17 @@
         <span class="text">Photos</span>
 
     </div>
+</div>
+</section>
+    <div class="dot red small" url="coding">
+        <span class="spinning-text spinning-text-small">GitHub</span>
+    </div>
+
+    <div class="dot red small" id="2">
+        <span class="spinning-text spinning-text-small">GitHub</span>
+    </div>
+<div class="dot red small" id="3">
+    <span class="spinning-text spinning-text-small">GitHub</span>
 </div>
 <script>
     function updateTime() {
@@ -74,63 +85,131 @@
     updateTime();
 </script>
 <script>
-    document.querySelectorAll('.trail').forEach((trail) => {
-        trail.addEventListener('click', function() {
-            // Add a class to keep the dot in its final position
-            this.classList.add('dot-stuck');
 
-            // Calculate the final position of the red dot
-            const dot = this.querySelector('.dot');
+    if (window.innerWidth >= 1200) {
+        document.querySelectorAll('.trail').forEach((trail) => {
+            trail.addEventListener('click', function() {
+                // Add a class to keep the dot in its final position
+                this.classList.add('dot-stuck');
 
-            // Define sizes for the new dots
-            const sizes = [400, 1200, 2000, 2800, 3600, 4400];
-            const newDots = []; // Array to keep track of new dots
+                // Calculate the final position of the red dot
+                const dot = this.querySelector('.dot');
 
-            sizes.forEach((size, index) => {
-                const newDot = document.createElement('div');
-                newDot.classList.add('new-dot', `new-dot-${index + 1}`);
-                newDot.style.position = 'absolute';
-                newDot.style.width = `${size}px`;
-                newDot.style.height = `${size}px`;
+                // Define sizes for the new dots
+                const sizes = [400, 1200, 2000, 2800, 3600, 4400];
+                const newDots = []; // Array to keep track of new dots
 
-                // no idea why this works
-                const dotRect = dot.getBoundingClientRect();
-                const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
-                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                sizes.forEach((size, index) => {
+                    const newDot = document.createElement('div');
+                    newDot.classList.add('new-dot', `new-dot-${index + 1}`);
+                    newDot.style.position = 'absolute';
+                    newDot.style.width = `${size}px`;
+                    newDot.style.height = `${size}px`;
 
-                newDot.style.left = `${dotRect.left + scrollLeft + dotRect.width / 2 - size / 2}px`;
-                newDot.style.top = `${dotRect.top + scrollTop + dotRect.height / 2 - size / 2}px`;
+                    // no idea why this works
+                    const dotRect = dot.getBoundingClientRect();
+                    const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
+                    const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
-                // Delay the appearance of each dot
-                setTimeout(() => {
-                    document.body.appendChild(newDot);
-                    newDots.push(newDot); // Add dot to the array
-                }, index * 200);
-            });
+                    newDot.style.left = `${dotRect.left + scrollLeft + dotRect.width / 2 - size / 2}px`;
+                    newDot.style.top = `${dotRect.top + scrollTop + dotRect.height / 2 - size / 2}px`;
 
-            // After all dots have appeared, change their colors and then redirect
-            setTimeout(() => {
-                newDots.forEach((dot, index) => {
+                    // Delay the appearance of each dot
                     setTimeout(() => {
-                        dot.style.backgroundColor = "#056CC1"; // Change color of each dot
+                        document.body.appendChild(newDot);
+                        newDots.push(newDot); // Add dot to the array
                     }, index * 200);
                 });
 
-                // Redirect to a new page after colors have changed
+                // After all dots have appeared, change their colors and then redirect
                 setTimeout(() => {
-                    const projectId = this.id;
-                    window.location.href = `${projectId}.html`;
-                }, newDots.length * 200 + 200); // Extra delay before redirecting
+                    newDots.forEach((dot, index) => {
+                        setTimeout(() => {
+                            dot.style.backgroundColor = "#056CC1"; // Change color of each dot
+                        }, index * 200);
+                    });
 
-                setTimeout(() => {
-                    newDots.forEach(dot => dot.remove());
-                    document.querySelectorAll('.dot-stuck').forEach(dot => dot.classList.remove('dot-stuck'));
-                }, sizes.length * 200 + 1000); // this is al little fucked
-            }, sizes.length * 200 + 200); // Wait until all dots have appeared
+                    // Redirect to a new page after colors have changed
+                    setTimeout(() => {
+                        const projectId = this.getAttribute("url");
+                        window.location.href = `${projectId}.html`;
+                    }, newDots.length * 200 + 200); // Extra delay before redirecting
+
+                    setTimeout(() => {
+                        newDots.forEach(dot => dot.remove());
+                        document.querySelectorAll('.dot-stuck').forEach(dot => dot.classList.remove('dot-stuck'));
+                    }, sizes.length * 200 + 1000); // this is al little fucked
+                }, sizes.length * 200 + 200); // Wait until all dots have appeared
 
 
+            });
         });
-    });
+    } else {
+        window.addEventListener('scroll', () => {
+            const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            const rotation = scrollPercentage * 3.6; // 3.6 degrees per 1% of scroll (360 / 100)
+            let multi = 1;
+            document.querySelectorAll('.spinning-text-small').forEach((element) => {
+                element.style.transform = `rotate(${rotation*multi}deg)`;
+                multi*=1.4;
+            });
+        });
+        document.querySelectorAll('.dot').forEach((trail) => {
+            trail.addEventListener('click', function() {
+
+                // Calculate the final position of the red dot
+                const dot = this
+
+                // Define sizes for the new dots
+                const sizes = [50, 100, 150, 200, 250, 300, 350];
+                const newDots = []; // Array to keep track of new dots
+
+                sizes.forEach((size, index) => {
+                    const newDot = document.createElement('div');
+                    newDot.classList.add('new-dot', `new-dot-${index + 1}`);
+                    newDot.style.position = 'absolute';
+                    newDot.style.width = `${size}vw`;
+                    newDot.style.height = `${size}vw`;
+
+                    // no idea why this works
+                    const dotRect = dot.getBoundingClientRect();
+                    const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
+                    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+                    // this is fun
+                    newDot.style.left = `${dotRect.left + scrollLeft + dotRect.width / 2 - ((size * window.innerWidth) / 100) / 2}px`;
+                    newDot.style.top = `${dotRect.top + scrollTop + dotRect.height / 2 - ((size * window.innerWidth) / 100) / 2}px`;
+
+                    // Delay the appearance of each dot
+                    setTimeout(() => {
+                        document.body.appendChild(newDot);
+                        newDots.push(newDot); // Add dot to the array
+                    }, index * 200);
+                });
+
+                // After all dots have appeared, change their colors and then redirect
+                setTimeout(() => {
+                    newDots.forEach((dot, index) => {
+                        setTimeout(() => {
+                            dot.style.backgroundColor = "#056CC1"; // Change color of each dot
+                        }, index * 200);
+                    });
+
+                    // Redirect to a new page after colors have changed
+                    setTimeout(() => {
+                        const projectId = this.getAttribute("url");
+                        window.location.href = `${projectId}.html`;
+                    }, newDots.length * 200 + 200); // Extra delay before redirecting
+
+                    setTimeout(() => {
+                        newDots.forEach(dot => dot.remove());
+                    }, sizes.length * 200 + 1000); // this is al little fucked
+                }, sizes.length * 200 + 200); // Wait until all dots have appeared
+            });
+        });
+    }
+
+
     document.addEventListener('DOMContentLoaded', () => {
         const textElements = document.querySelectorAll('.text');
 
