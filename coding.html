@@ -30,28 +30,7 @@
         <h1>Coding</h1>
     </div>
     <section class="project-content">
-    <div class="heading-container">
-    <h2>I. Cachesim</h2>
-        <div class="dot smoll red" id="github.com/Nicolas-Py/system-c-gra-project">
-            <span class="spinning-text spinning-text-small">GitHub</span>
-        </div>
-    </div>
-    <p>
-        This project investigates the simulation of direct-mapped and fully-associative caches in modern processors. The aim is to compare the performance metrics of both cache architectures, implemented in SystemC, C++ and C.
-        I created a python script which simulates the memory accesses of the merge sort algorithm and returns a csv with the memory address the datum and if it is a read or write access
-        I was responsible for the CLI. Therefore, passing parameters catching wrong inputs and printing useful error messages.
-        For more details one can look at the GitHub repo
-
-    </p>
-        <div class="heading-container">
-            <h2>II. Soundscape</h2>
-            <div class="dot smoll red" id="github.com/Nicolas-Py/ParaboxUnrealProject">
-                <span class="spinning-text spinning-text-small">GitHub</span>
-            </div>
-        </div>
-        <p>
-            For my Unreal Engine 4 project, I created an immersive 3D sound world where users can explore a virtual environment and experience spatial audio dynamics. I designed various soundscapes that react to the player's movements and interactions, simulating how sound behaves in different physical spaces. The project involved creating custom audio assets, programming player controls, and implementing real-time sound processing effects. The aim was to enhance the user's sensory experience, blending visual and auditory elements to create a more engaging and explorative atmosphere.
-        </p>
+        <!-- Projects will be loaded dynamically from projects.json -->
     </section>
     <div class="dots">
         <div class="dot red" id="github.com/Nicolas-Py">
@@ -115,5 +94,73 @@
             }, 400);
         });
     });
+</script>
+<script>
+// Function to convert a number to a Roman numeral (supports 1-10)
+function toRoman(num) {
+    const romanNumerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
+    return romanNumerals[num - 1] || num;
+}
+
+function loadProjects() {
+    fetch('projects.json')
+        .then(response => response.json())
+        .then(data => {
+            const container = document.querySelector('.project-content');
+            container.innerHTML = ''; // Clear any existing content
+            data.forEach((project, index) => {
+                // Create a heading container for the project
+                const headingDiv = document.createElement('div');
+                headingDiv.className = 'heading-container';
+
+                // Create an h2 element with the project title prefixed by its Roman numeral index
+                const h2 = document.createElement('h2');
+                h2.textContent = toRoman(index + 1) + '. ' + project.title;
+                headingDiv.appendChild(h2);
+
+                // Determine the dot color based on the link label (WEB => yellow, otherwise red)
+                let colorClass = project.link.label.toUpperCase().includes('WEB') ? 'yellow' : 'red';
+
+                // Create the dot element
+                const dotElement = document.createElement('div');
+                dotElement.className = 'dot smoll ' + colorClass;
+                // Set the id attribute to the project URL without the protocol
+                dotElement.id = project.link.url.replace(/^https?:\/\//, '');
+
+                // Create a span for the dot text
+                const span = document.createElement('span');
+                span.className = 'spinning-text spinning-text-small';
+                span.textContent = project.link.label;
+                dotElement.appendChild(span);
+
+                // Add click event listener to the dot (same behavior as existing dots)
+                dotElement.addEventListener('click', function() {
+                    this.classList.add('dot-big');
+                    setTimeout(() => {
+                        const route = this.id;
+                        const baseUrl = 'https://';
+                        window.location.href = `${baseUrl}${route}`;
+                        setTimeout(() => {
+                            this.classList.remove('dot-big');
+                        }, 800);
+                    }, 400);
+                });
+
+                headingDiv.appendChild(dotElement);
+
+                // Create a paragraph for the project description
+                const p = document.createElement('p');
+                p.textContent = project.description;
+
+                // Append the heading container and description to the project content container
+                container.appendChild(headingDiv);
+                container.appendChild(p);
+            });
+        })
+        .catch(error => console.error('Error loading projects:', error));
+}
+
+// Load projects when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', loadProjects);
 </script>
 </html>
