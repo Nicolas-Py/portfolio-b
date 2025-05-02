@@ -11,7 +11,8 @@ body {
 }
 /* Styling for the header section */
 .header {
-    width: 1200px;
+    width: 100%;
+    max-width: 1200px;
     padding: 20px;
     margin-bottom: 20px;
     z-index: 99;
@@ -41,10 +42,12 @@ body {
 }
 /* Container to center content */
 .container {
-    width: 1200px;
+    width: 100%;
+    max-width: 1200px;
     align-items: center;
     justify-content: flex-start;
     padding: 20px;
+    box-sizing: border-box;
 }
 
 .heading-container {
@@ -82,6 +85,7 @@ a {
     justify-content: space-between; /* Spreads children out, first to left, last to right */
     flex-direction: row; /* Ensures that children are laid out in a row (horizontal alignment) */
     width: 100%; /* Ensures the container takes up full width */
+    gap: 20px;
 }
 
 /* Individual dot styling */
@@ -138,7 +142,6 @@ a {
     display: none;
 }
 
-
 .dot:hover .spinning-text {
     opacity: 1;
     animation: spin 5s linear infinite;
@@ -151,5 +154,98 @@ a {
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+
+/* Mobile Responsive Styles */
+@media screen and (max-width: 1200px) {
+    .header {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 4em;
+    }
+
+    h2 {
+        font-size: 3em;
+    }
+
+    p {
+        font-size: 1.5em;
+    }
+
+    .dot {
+        width: 150px;
+        height: 150px;
+    }
+
+    .smoll {
+        width: 6em;
+        height: 6em;
+    }
+
+    .spinning-text {
+        font-size: 1.5em;
+    }
+
+    .spinning-text-small {
+        font-size: 0.8em;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 5px;
+    }
+
+    .container {
+        padding: 5px;
+    }
+
+    h1 {
+        font-size: 3em;
+    }
+
+    h2 {
+        font-size: 2em;
+    }
+
+    p {
+        font-size: 1.2em;
+    }
+
+    .dot {
+        width: 100px;
+        height: 100px;
+    }
+
+    .smoll {
+        width: 4em;
+        height: 4em;
+    }
+
+    .spinning-text {
+        font-size: 1em;
+        opacity: 1;
+    }
+
+    .spinning-text-small {
+        font-size: 0.7em;
+        opacity: 1;
+    }
+
+    .dots {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .heading-container {
+        flex-direction: column;
+        gap: 10px;
     }
 }

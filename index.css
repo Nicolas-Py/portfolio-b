@@ -13,9 +13,10 @@ body {
 .header {
     width: 1200px;
     padding: 20px;
+    margin: 0 auto;
     margin-bottom: 20px;
     z-index: 99;
-    position: fixed;
+    position: relative;
 }
 
 .text-block {
@@ -43,11 +44,15 @@ body {
 
 /* Styling for the sliding window section */
 .main-section {
+    width: 1200px;
+    margin: 0 auto;
     margin-top: 10vw;
+    position: relative;
 }
+
 .dot-container {
     position: relative;
-    width: 1200px;
+    width: 100%;
     height: 400px;
     padding: 50px;
 }
@@ -87,7 +92,7 @@ body {
 .text span {
     opacity: 0;
     transform: translateY(20px);
-    transition: transform 1s ease, opacity 0.3s ease; /* Transition for both fade-in and transform */
+    transition: transform 1s ease, opacity 0.3s ease;
 }
 
 .trail:hover {
@@ -105,11 +110,8 @@ body {
 
 .trail:not(:hover) .text span {
     visibility: hidden;
-    transform: translateY(20px); /* Slide back down */
+    transform: translateY(20px);
 }
-
-
-
 
 .dot-stuck {
     background-color: transparent
@@ -162,51 +164,19 @@ body {
     display: none;
 }
 
-/* Media Query for screens smaller than 1200px */
-@media (max-width: 1199px) {
-    .header {
+/* Mobile Responsive Styles */
+@media screen and (max-width: 1200px) {
+    .header, .main-section {
         width: 100%;
-        padding: 0;
-        z-index: 99;
+        max-width: 1200px;
+        padding: 10px;
     }
-    .trail {
-        background-color: transparent;
-        position: relative;
-        margin-bottom: 40px;
-    }
-    .dot-container {
-        display: none;
-    }
+}
 
-    .dot {
-        position: relative;
-        width: 50vw;
-        height: 50vw;
-        margin: 25vw;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        transition: transform 0.5s linear;
-    }
-    .yellow {
-        background-color: #e0a347;
-    }
-    .red {
-        background-color: #d1403f;
-    }
-    .spinning-text-small {
-        position: absolute;
+@media screen and (max-width: 768px) {
+    .header, .main-section {
         width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 10vw;
-        text-transform: uppercase;
-        text-align: center;
-        color: #fff;
-        transform: rotate(0deg);
+        max-width: 1200px;
+        padding: 5px;
     }
 }
