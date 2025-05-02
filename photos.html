@@ -76,6 +76,19 @@
             }, 400);
         });
     });
+
+    // Add scroll-based spinning animation for mobile
+    if (window.innerWidth < 1200) {
+        window.addEventListener('scroll', () => {
+            const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            const rotation = scrollPercentage * 3.6; // 3.6 degrees per 1% of scroll (360 / 100)
+            let multi = 1;
+            document.querySelectorAll('.spinning-text-small').forEach((element) => {
+                element.style.transform = `rotate(${rotation*multi}deg)`;
+                multi*=1.4;
+            });
+        });
+    }
 </script>
 </body>
 </html> 

@@ -142,7 +142,6 @@ a {
     display: none;
 }
 
-
 .dot:hover .spinning-text {
     opacity: 1;
     animation: spin 5s linear infinite;
@@ -232,10 +231,12 @@ a {
 
     .spinning-text {
         font-size: 1em;
+        opacity: 1;
     }
 
     .spinning-text-small {
         font-size: 0.7em;
+        opacity: 1;
     }
 
     .dots {
