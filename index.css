@@ -171,6 +171,17 @@ body {
         max-width: 1200px;
         padding: 10px;
     }
+
+    .small {
+        display: block;
+        width: 100px;
+        height: 100px;
+        margin: 10px auto;
+    }
+
+    .spinning-text-small {
+        opacity: 1;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -178,5 +189,16 @@ body {
         width: 100%;
         max-width: 1200px;
         padding: 5px;
+    }
+
+    .small {
+        width: 80px;
+        height: 80px;
+        margin: 5px auto;
+    }
+
+    .spinning-text-small {
+        font-size: 0.8em;
+        opacity: 1;
     }
 }

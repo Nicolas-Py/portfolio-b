@@ -150,6 +150,17 @@
                 });
             });
         } else {
+            // Hide the expanding chips on mobile
+            document.querySelectorAll('.trail').forEach(trail => {
+                trail.style.display = 'none';
+            });
+            
+            // Show the small dots on mobile
+            document.querySelectorAll('.dot.small').forEach(dot => {
+                dot.style.display = 'block';
+            });
+
+            // Add scroll-based spinning animation for mobile
             window.addEventListener('scroll', () => {
                 const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
                 const rotation = scrollPercentage * 3.6; // 3.6 degrees per 1% of scroll (360 / 100)
@@ -159,8 +170,10 @@
                     multi*=1.4;
                 });
             });
-            document.querySelectorAll('.dot').forEach((trail) => {
-                trail.addEventListener('click', function() {
+
+            // Simple click handler for mobile
+            document.querySelectorAll('.dot.small').forEach((dot) => {
+                dot.addEventListener('click', function() {
                     const projectId = this.getAttribute("url");
                     window.location.href = `${projectId}.html`;
                 });
