@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coding - Nicolas Mallinckrodt</title>
+    <title>Photos - Nicolas Mallinckrodt</title>
     <link rel="stylesheet" href="project.css">
     <link rel="stylesheet" href="https://use.typekit.net/jlz2zhe.css">
     <link rel="icon" type="image/x-icon" href="util/favicon.ico">
@@ -27,19 +27,12 @@
         <div class="dot smoll yellow" id="index">
             <span class="spinning-text spinning-text-small">BACK</span>
         </div>
-        <h1>Coding</h1>
+        <h1>Photos</h1>
     </div>
     <section class="project-content">
-        <!-- Projects will be loaded dynamically from projects.json -->
+        <h2>Coming Soon</h2>
+        <p>This section is currently under development. Please check back later.</p>
     </section>
-    <div class="dots">
-        <div class="dot red" id="github.com/Nicolas-Py">
-            <span class="spinning-text">Github</span>
-        </div>
-        <div class="dot yellow" id="nicolas-py.github.io/portfolio">
-            <span class="spinning-text">Home</span>
-        </div>
-    </div>
 </div>
 <script>
     function updateTime() {
@@ -84,62 +77,5 @@
         });
     });
 </script>
-<script>
-function toRoman(num) {
-    const romanNumerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"];
-    return romanNumerals[num - 1] || num;
-}
-
-function loadProjects() {
-    fetch('projects.json')
-        .then(response => response.json())
-        .then(data => {
-            const container = document.querySelector('.project-content');
-            container.innerHTML = '';
-            data.forEach((project, index) => {
-                const headingDiv = document.createElement('div');
-                headingDiv.className = 'heading-container';
-
-                const h2 = document.createElement('h2');
-                h2.textContent = toRoman(index + 1) + '. ' + project.title;
-                headingDiv.appendChild(h2);
-
-                let colorClass = project.link.label.toUpperCase().includes('WEB') ? 'yellow' : 'red';
-
-                const dotElement = document.createElement('div');
-                dotElement.className = 'dot smoll ' + colorClass;
-                dotElement.id = project.link.url.replace(/^https?:\/\//, '');
-
-                const span = document.createElement('span');
-                span.className = 'spinning-text spinning-text-small';
-                span.textContent = project.link.label;
-                dotElement.appendChild(span);
-
-                dotElement.addEventListener('click', function() {
-                    this.classList.add('dot-big');
-                    setTimeout(() => {
-                        const route = this.id;
-                        const baseUrl = 'https://';
-                        window.location.href = `${baseUrl}${route}`;
-                        setTimeout(() => {
-                            this.classList.remove('dot-big');
-                        }, 800);
-                    }, 400);
-                });
-
-                headingDiv.appendChild(dotElement);
-
-                const p = document.createElement('p');
-                p.textContent = project.description;
-
-                container.appendChild(headingDiv);
-                container.appendChild(p);
-            });
-        })
-        .catch(error => console.error('Error loading projects:', error));
-}
-
-document.addEventListener('DOMContentLoaded', loadProjects);
-</script>
 </body>
-</html>
+</html> 
