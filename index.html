@@ -160,7 +160,7 @@
             document.querySelectorAll('.dot.small').forEach(dot => {
                 dot.style.display = 'block';
                 dot.style.position = 'relative';
-                dot.style.margin = '20px auto';
+                dot.style.margin = '50px auto';
             });
 
             // Mobile scroll handler
@@ -179,11 +179,48 @@
                 lastScrollTop = scrollTop;
             });
 
-            // Mobile click handlers
+            // Mobile click handlers with transition animation
             document.querySelectorAll('.dot.small').forEach((dot) => {
                 dot.addEventListener('click', function() {
                     const projectId = this.getAttribute("url");
-                    window.location.href = `${projectId}.html`;
+                    
+                    // Create expanding circles animation
+                    const sizes = [150, 300, 450, 600, 750, 900];
+                    const newDots = [];
+                    
+                    sizes.forEach((size, index) => {
+                        const newDot = document.createElement('div');
+                        newDot.classList.add('new-dot', `new-dot-${index + 1}`);
+                        newDot.style.position = 'fixed';
+                        newDot.style.width = `${size}px`;
+                        newDot.style.height = `${size}px`;
+                        
+                        const dotRect = this.getBoundingClientRect();
+                        newDot.style.left = `${dotRect.left + dotRect.width / 2 - size / 2}px`;
+                        newDot.style.top = `${dotRect.top + dotRect.height / 2 - size / 2}px`;
+                        
+                        setTimeout(() => {
+                            document.body.appendChild(newDot);
+                            newDots.push(newDot);
+                        }, index * 100);
+                    });
+                    
+                    // Change colors and redirect
+                    setTimeout(() => {
+                        newDots.forEach((dot, index) => {
+                            setTimeout(() => {
+                                dot.style.backgroundColor = "#056CC1";
+                            }, index * 100);
+                        });
+                        
+                        setTimeout(() => {
+                            window.location.href = `${projectId}.html`;
+                        }, sizes.length * 100 + 200);
+                        
+                        setTimeout(() => {
+                            newDots.forEach(dot => dot.remove());
+                        }, sizes.length * 100 + 1000);
+                    }, sizes.length * 100);
                 });
             });
         }
