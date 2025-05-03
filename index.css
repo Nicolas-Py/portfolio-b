@@ -7,6 +7,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 /* Styling for the header section */
@@ -168,13 +170,16 @@ body {
 @media screen and (max-width: 1200px) {
     body {
         overflow-x: hidden;
+
+      
     }
 
     .header, .main-section {
         width: 100%;
-        max-width: 1200px;
+        max-width: 100%;
         padding: 10px;
         box-sizing: border-box;
+
     }
 
     .small {
@@ -182,10 +187,13 @@ body {
         width: 100px;
         height: 100px;
         margin: 40px auto;
+
         position: relative;
         background-color: #d1403f;
         border-radius: 50%;
         cursor: pointer;
+
+        transition: transform 0.3s ease, background-color 0.3s ease;
     }
 
     .spinning-text-small {
@@ -198,6 +206,7 @@ body {
         white-space: nowrap;
         opacity: 1;
         transition: transform 0.1s ease;
+
     }
 
     .dot-container {
@@ -211,6 +220,22 @@ body {
         padding: 5px;
     }
 
+    .top-text, .bottom-text {
+        font-size: 1.2em;
+    }
+
+    .small {
+        width: 100px;
+        height: 100px;
+        margin: 25px auto;
+    }
+
+    .spinning-text-small {
+        font-size: 1em;
+    }
+}
+
+@media screen and (max-width: 480px) {
     .small {
         width: 80px;
         height: 80px;
@@ -239,5 +264,6 @@ body {
 
     .top-text, .bottom-text {
         font-size: 1.2em;
+
     }
 }
