@@ -158,7 +158,7 @@ a {
 }
 
 /* Mobile Responsive Styles */
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 768px) {
     body {
         overflow-x: hidden;
         width: 100%;
@@ -170,7 +170,6 @@ a {
         max-width: 100%;
         padding: 10px;
         box-sizing: border-box;
-        overflow-x: hidden;
     }
 
     .container {
@@ -178,26 +177,27 @@ a {
         max-width: 100%;
         padding: 10px;
         box-sizing: border-box;
-        overflow-x: hidden;
     }
 
     .dot {
-        width: 120px;
-        height: 120px;
-        margin: 30px auto;
+        width: 80px;
+        height: 80px;
+        margin: 15px auto;
     }
 
     .smoll {
-        width: 100px;
-        height: 100px;
+        width: 60px;
+        height: 60px;
     }
 
     .spinning-text {
-        font-size: 1.2em;
+        font-size: 0.8em;
+        opacity: 1;
     }
 
     .spinning-text-small {
-        font-size: 1em;
+        font-size: 0.7em;
+        opacity: 1;
     }
 
     .dots {
@@ -213,44 +213,20 @@ a {
     }
 
     h1 {
-        font-size: 4em;
-    }
-    h2 {
         font-size: 3em;
     }
-    p {
-        font-size: 1.5em;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .dot {
-        width: 100px;
-        height: 100px;
-        margin: 25px auto;
-    }
-
-    .smoll {
-        width: 80px;
-        height: 80px;
-    }
-
-    .spinning-text {
-        font-size: 1em;
-    }
-
-    .spinning-text-small {
-        font-size: 0.9em;
-    }
-
-    h1 {
-        font-size: 3em;
-    }
+    
     h2 {
-        font-size: 2.5em;
+        font-size: 2em;
     }
+    
     p {
         font-size: 1.2em;
+    }
+
+    .top-text,
+    .bottom-text {
+        font-size: 1.5em;
     }
 }
 
