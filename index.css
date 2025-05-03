@@ -7,6 +7,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 /* Styling for the header section */
@@ -168,13 +170,16 @@ body {
 @media screen and (max-width: 1200px) {
     body {
         overflow-x: hidden;
+        width: 100%;
+        position: relative;
     }
 
     .header, .main-section {
         width: 100%;
-        max-width: 1200px;
+        max-width: 100%;
         padding: 10px;
         box-sizing: border-box;
+        overflow-x: hidden;
     }
 
     .text-block {
@@ -191,19 +196,14 @@ body {
 
     .small {
         display: block;
-        width: 150px;
-        height: 150px;
-        margin: 50px auto;
+        width: 120px;
+        height: 120px;
+        margin: 30px auto;
         position: relative;
         background-color: #d1403f;
         border-radius: 50%;
         cursor: pointer;
         transition: transform 0.3s ease, background-color 0.3s ease;
-    }
-
-    .small:hover {
-        transform: scale(1.05);
-        background-color: #b33635;
     }
 
     .spinning-text-small {
@@ -212,11 +212,13 @@ body {
         left: 50%;
         transform: translate(-50%, -50%);
         color: white;
-        font-size: 1.5em;
+        font-size: 1.2em;
         white-space: nowrap;
         opacity: 1;
         transition: transform 0.1s ease;
         font-weight: bold;
+        width: 100%;
+        text-align: center;
     }
 
     .dot-container {
@@ -235,25 +237,25 @@ body {
     }
 
     .small {
-        width: 120px;
-        height: 120px;
-        margin: 40px auto;
+        width: 100px;
+        height: 100px;
+        margin: 25px auto;
     }
 
     .spinning-text-small {
-        font-size: 1.2em;
+        font-size: 1em;
     }
 }
 
 @media screen and (max-width: 480px) {
     .small {
-        width: 100px;
-        height: 100px;
-        margin: 35px auto;
+        width: 80px;
+        height: 80px;
+        margin: 20px auto;
     }
 
     .spinning-text-small {
-        font-size: 1em;
+        font-size: 0.9em;
     }
 
     .top-text, .bottom-text {

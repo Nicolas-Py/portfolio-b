@@ -159,93 +159,98 @@ a {
 
 /* Mobile Responsive Styles */
 @media screen and (max-width: 1200px) {
+    body {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+    }
+
     .header {
+        width: 100%;
+        max-width: 100%;
         padding: 10px;
+        box-sizing: border-box;
+        overflow-x: hidden;
     }
 
     .container {
+        width: 100%;
+        max-width: 100%;
         padding: 10px;
-    }
-
-    h1 {
-        font-size: 4em;
-    }
-
-    h2 {
-        font-size: 3em;
-    }
-
-    p {
-        font-size: 1.5em;
+        box-sizing: border-box;
+        overflow-x: hidden;
     }
 
     .dot {
-        width: 150px;
-        height: 150px;
+        width: 120px;
+        height: 120px;
+        margin: 30px auto;
     }
 
     .smoll {
-        width: 6em;
-        height: 6em;
-    }
-
-    .spinning-text {
-        font-size: 1.5em;
-    }
-
-    .spinning-text-small {
-        font-size: 0.8em;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .header {
-        padding: 5px;
-    }
-
-    .container {
-        padding: 5px;
-    }
-
-    h1 {
-        font-size: 3em;
-    }
-
-    h2 {
-        font-size: 2em;
-    }
-
-    p {
-        font-size: 1.2em;
-    }
-
-    .dot {
         width: 100px;
         height: 100px;
     }
 
-    .smoll {
-        width: 4em;
-        height: 4em;
-    }
-
     .spinning-text {
-        font-size: 1em;
-        opacity: 1;
+        font-size: 1.2em;
     }
 
     .spinning-text-small {
-        font-size: 0.7em;
-        opacity: 1;
+        font-size: 1em;
     }
 
     .dots {
         flex-direction: column;
-        gap: 10px;
+        gap: 20px;
+        align-items: center;
     }
 
     .heading-container {
         flex-direction: column;
-        gap: 10px;
+        gap: 20px;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .dot {
+        width: 100px;
+        height: 100px;
+        margin: 25px auto;
+    }
+
+    .smoll {
+        width: 80px;
+        height: 80px;
+    }
+
+    .spinning-text {
+        font-size: 1em;
+    }
+
+    .spinning-text-small {
+        font-size: 0.9em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .dot {
+        width: 80px;
+        height: 80px;
+        margin: 20px auto;
+    }
+
+    .smoll {
+        width: 60px;
+        height: 60px;
+    }
+
+    .spinning-text {
+        font-size: 0.9em;
+    }
+
+    .spinning-text-small {
+        font-size: 0.8em;
     }
 }
