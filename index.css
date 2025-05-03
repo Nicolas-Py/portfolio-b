@@ -166,39 +166,78 @@ body {
 
 /* Mobile Responsive Styles */
 @media screen and (max-width: 1200px) {
+    body {
+        overflow-x: hidden;
+    }
+
     .header, .main-section {
         width: 100%;
         max-width: 1200px;
         padding: 10px;
+        box-sizing: border-box;
     }
 
     .small {
         display: block;
         width: 100px;
         height: 100px;
-        margin: 10px auto;
+        margin: 40px auto;
+        position: relative;
+        background-color: #d1403f;
+        border-radius: 50%;
+        cursor: pointer;
     }
 
     .spinning-text-small {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 1.2em;
+        white-space: nowrap;
         opacity: 1;
+        transition: transform 0.1s ease;
+    }
+
+    .dot-container {
+        display: none;
     }
 }
 
 @media screen and (max-width: 768px) {
     .header, .main-section {
         width: 100%;
-        max-width: 1200px;
         padding: 5px;
     }
 
     .small {
         width: 80px;
         height: 80px;
-        margin: 5px auto;
+        margin: 30px auto;
+    }
+
+    .spinning-text-small {
+        font-size: 1em;
+    }
+
+    .top-text, .bottom-text {
+        font-size: 1.5em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .small {
+        width: 60px;
+        height: 60px;
+        margin: 25px auto;
     }
 
     .spinning-text-small {
         font-size: 0.8em;
-        opacity: 1;
+    }
+
+    .top-text, .bottom-text {
+        font-size: 1.2em;
     }
 }

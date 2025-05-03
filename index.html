@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Nicolas Mallinckrodt</title>
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://use.typekit.net/jlz2zhe.css">
@@ -79,12 +79,13 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const textElements = document.querySelectorAll('.text');
+        const isMobile = window.innerWidth < 1200;
 
+        // Initialize text animations
         textElements.forEach(textElement => {
             const text = textElement.textContent;
             textElement.innerHTML = ''; // Clear the text content
 
-            // Wrap each letter in a span and append to the .text element
             text.split('').forEach((letter, index) => {
                 const span = document.createElement('span');
                 span.textContent = letter;
@@ -93,7 +94,8 @@
             });
         });
 
-        if (window.innerWidth >= 1200) {
+        // Handle mobile/desktop views
+        if (!isMobile) {
             document.querySelectorAll('.trail').forEach((trail) => {
                 trail.addEventListener('click', function() {
                     // Add a class to keep the dot in its final position
@@ -150,28 +152,34 @@
                 });
             });
         } else {
-            // Hide the expanding chips on mobile
+            // Mobile-specific setup
             document.querySelectorAll('.trail').forEach(trail => {
                 trail.style.display = 'none';
             });
             
-            // Show the small dots on mobile
             document.querySelectorAll('.dot.small').forEach(dot => {
                 dot.style.display = 'block';
+                dot.style.position = 'relative';
+                dot.style.margin = '20px auto';
             });
 
-            // Add scroll-based spinning animation for mobile
+            // Mobile scroll handler
+            let lastScrollTop = 0;
             window.addEventListener('scroll', () => {
-                const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-                const rotation = scrollPercentage * 3.6; // 3.6 degrees per 1% of scroll (360 / 100)
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                const scrollPercentage = (scrollTop / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+                const rotation = scrollPercentage * 3.6;
                 let multi = 1;
+                
                 document.querySelectorAll('.spinning-text-small').forEach((element) => {
-                    element.style.transform = `rotate(${rotation*multi}deg)`;
-                    multi*=1.4;
+                    element.style.transform = `rotate(${rotation * multi}deg)`;
+                    multi *= 1.4;
                 });
+                
+                lastScrollTop = scrollTop;
             });
 
-            // Simple click handler for mobile
+            // Mobile click handlers
             document.querySelectorAll('.dot.small').forEach((dot) => {
                 dot.addEventListener('click', function() {
                     const projectId = this.getAttribute("url");
@@ -179,6 +187,15 @@
                 });
             });
         }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1200 && isMobile) {
+                window.location.reload();
+            } else if (window.innerWidth < 1200 && !isMobile) {
+                window.location.reload();
+            }
+        });
     });
 </script>
 </body>
