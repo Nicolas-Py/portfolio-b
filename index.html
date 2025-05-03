@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
     <title>Nicolas Mallinckrodt</title>
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://use.typekit.net/jlz2zhe.css">
@@ -160,7 +161,8 @@
             document.querySelectorAll('.dot.small').forEach(dot => {
                 dot.style.display = 'block';
                 dot.style.position = 'relative';
-                dot.style.margin = '50px auto';
+                dot.style.margin = '20px auto';
+
             });
 
             // Mobile scroll handler
@@ -179,7 +181,6 @@
                 lastScrollTop = scrollTop;
             });
 
-            // Mobile click handlers with transition animation
             document.querySelectorAll('.dot.small').forEach((dot) => {
                 dot.addEventListener('click', function() {
                     const projectId = this.getAttribute("url");

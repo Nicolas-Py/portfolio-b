@@ -170,8 +170,8 @@ body {
 @media screen and (max-width: 1200px) {
     body {
         overflow-x: hidden;
-        width: 100%;
-        position: relative;
+
+      
     }
 
     .header, .main-section {
@@ -179,30 +179,20 @@ body {
         max-width: 100%;
         padding: 10px;
         box-sizing: border-box;
-        overflow-x: hidden;
-    }
 
-    .text-block {
-        padding: 0 20px;
-    }
-
-    .top-text, .bottom-text {
-        font-size: 1.5em;
-        flex-wrap: nowrap;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
     }
 
     .small {
         display: block;
-        width: 120px;
-        height: 120px;
-        margin: 30px auto;
+        width: 100px;
+        height: 100px;
+        margin: 40px auto;
+
         position: relative;
         background-color: #d1403f;
         border-radius: 50%;
         cursor: pointer;
+
         transition: transform 0.3s ease, background-color 0.3s ease;
     }
 
@@ -216,9 +206,7 @@ body {
         white-space: nowrap;
         opacity: 1;
         transition: transform 0.1s ease;
-        font-weight: bold;
-        width: 100%;
-        text-align: center;
+
     }
 
     .dot-container {
@@ -251,14 +239,31 @@ body {
     .small {
         width: 80px;
         height: 80px;
-        margin: 20px auto;
+        margin: 30px auto;
     }
 
     .spinning-text-small {
-        font-size: 0.9em;
+        font-size: 1em;
     }
 
     .top-text, .bottom-text {
-        font-size: 1em;
+        font-size: 1.5em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .small {
+        width: 60px;
+        height: 60px;
+        margin: 25px auto;
+    }
+
+    .spinning-text-small {
+        font-size: 0.8em;
+    }
+
+    .top-text, .bottom-text {
+        font-size: 1.2em;
+
     }
 }
