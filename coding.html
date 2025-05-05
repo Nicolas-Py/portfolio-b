@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="project.css">
     <link rel="stylesheet" href="https://use.typekit.net/jlz2zhe.css">
     <link rel="icon" type="image/x-icon" href="util/favicon.ico">
+    <style>
+        .dot.red.small {
+            margin-bottom: 2rem;
+        }
+    </style>
 </head>
 <body>
 <div class="header">
@@ -41,13 +46,13 @@
         </div>
     </div>
 </div>
-<div class="dot red small" url="coding">
+<div class="dot red small" url="coding" id="coding">
     <span class="spinning-text spinning-text-small">Coding</span>
 </div>
-<div class="dot red small" url="design">
+<div class="dot red small" url="design" id="design">
     <span class="spinning-text spinning-text-small">Design</span>
 </div>
-<div class="dot red small" url="photos">
+<div class="dot red small" url="photos" id="photos">
     <span class="spinning-text spinning-text-small">Photos</span>
 </div>
 <script>
@@ -82,7 +87,11 @@
                 const route = this.id;
                 if (route === 'index') {
                     window.location.href = 'index.html';
+                } else if (this.getAttribute('url')) {
+                    // Handle bottom navigation dots
+                    window.location.href = `${route}.html`;
                 } else {
+                    // Handle external links (GitHub, etc.)
                     const baseUrl = 'https://';
                     window.location.href = `${baseUrl}${route}`;
                 }
