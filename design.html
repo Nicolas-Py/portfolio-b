@@ -34,13 +34,13 @@
         <p>This section is currently under development. Please check back later.</p>
     </section>
 </div>
-<div class="dot red small" url="coding">
+<div class="dot red small" url="coding" id="coding">
     <span class="spinning-text spinning-text-small">Coding</span>
 </div>
-<div class="dot red small" url="design">
+<div class="dot red small" url="design" id="design">
     <span class="spinning-text spinning-text-small">Design</span>
 </div>
-<div class="dot red small" url="photos">
+<div class="dot red small" url="photos" id="photos">
     <span class="spinning-text spinning-text-small">Photos</span>
 </div>
 <script>
@@ -75,7 +75,11 @@
                 const route = this.id;
                 if (route === 'index') {
                     window.location.href = 'index.html';
+                } else if (this.getAttribute('url')) {
+                    // Handle bottom navigation dots
+                    window.location.href = `${route}.html`;
                 } else {
+                    // Handle external links (GitHub, etc.)
                     const baseUrl = 'https://';
                     window.location.href = `${baseUrl}${route}`;
                 }
