@@ -1,240 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
     <title>Nicolas Mallinckrodt</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="https://use.typekit.net/jlz2zhe.css">
-    <link rel="icon" type="image/x-icon" href="util/favicon.ico">
-</head>
-<body>
-<div class="header">
-    <div class="text-block">
+    <link
+      rel="stylesheet"
+      href="index.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.typekit.net/jlz2zhe.css"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="util/favicon.ico"
+    />
+  </head>
+  <body>
+    <div class="header">
+      <div class="text-block">
         <div class="top-text">
-            <span class="name">nicolas</span>
-            <span class="time" id="time">12:16</span>
+          <span class="name">nicolas</span>
+          <span
+            class="time"
+            id="time"
+            >12:16</span
+          >
         </div>
         <div class="divider"></div>
         <div class="bottom-text">
-            <span class="inverted name">mallinckrodt</span>
-            <span class="inverted date" id="date">26.08.2024</span>
+          <span class="inverted name">mallinckrodt</span>
+          <span
+            class="inverted date"
+            id="date"
+            >26.08.2024</span
+          >
         </div>
+      </div>
     </div>
-</div>
-<section class="main-section">
-<div class="dot-container">
-    <div class="trail" url="coding">
-        <div class="dot"></div>
-        <span class="text">Coding</span>
-    </div>
-</div>
-<div class="dot-container">
-    <div class="trail" url="design">
-        <div class="dot"></div>
-        <span class="text">Design</span>
-    </div>
-</div>
-<div class="dot-container">
-    <div class="trail" url="photos">
-        <div class="dot"></div>
-        <span class="text">Photos</span>
-    </div>
-</div>
-</section>
-    <div class="dot red small" url="coding">
-        <span class="spinning-text spinning-text-small">Coding</span>
+    <section class="main-section">
+      <div class="dot-container">
+        <div
+          class="trail"
+          url="projects"
+        >
+          <div class="dot"></div>
+          <span class="text">Projects</span>
+        </div>
+      </div>
+      <div class="dot-container">
+        <div
+          class="trail"
+          url="writing"
+        >
+          <div class="dot"></div>
+          <span class="text">Writing</span>
+        </div>
+      </div>
+      <div class="dot-container">
+        <div
+          class="trail"
+          url="about"
+        >
+          <div class="dot"></div>
+          <span class="text">About</span>
+        </div>
+      </div>
+    </section>
+    <div
+      class="dot red small"
+      url="projects"
+    >
+      <span class="spinning-text spinning-text-small">Projects</span>
     </div>
 
-    <div class="dot red small" url="design">
-        <span class="spinning-text spinning-text-small">Design</span>
+    <div
+      class="dot red small"
+      url="writing"
+    >
+      <span class="spinning-text spinning-text-small">Writing</span>
     </div>
-<div class="dot red small" url="photos">
-    <span class="spinning-text spinning-text-small">Photos</span>
-</div>
-<script>
-    function updateTime() {
+    <div
+      class="dot red small"
+      url="about"
+    >
+      <span class="spinning-text spinning-text-small">About</span>
+    </div>
+    <script>
+      function updateTime() {
         const now = new Date();
-        const day = String(now.getDate()).padStart(2, '0');
-        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, "0");
+        const month = String(now.getMonth() + 1).padStart(2, "0");
         const year = now.getFullYear();
         const formattedDate = `${day}.${month}.${year}`;
 
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, "0");
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        const seconds = String(now.getSeconds()).padStart(2, "0");
         const timezoneOffset = now.getTimezoneOffset();
-        const timezoneHours = String(Math.abs(timezoneOffset) / 60).padStart(2, '0');
-        const timezoneMinutes = String(Math.abs(timezoneOffset) % 60).padStart(2, '0');
-        const timezoneSign = timezoneOffset > 0 ? '-' : '+';
+        const timezoneHours = String(Math.abs(timezoneOffset) / 60).padStart(
+          2,
+          "0"
+        );
+        const timezoneMinutes = String(Math.abs(timezoneOffset) % 60).padStart(
+          2,
+          "0"
+        );
+        const timezoneSign = timezoneOffset > 0 ? "-" : "+";
         const formattedTime = `${hours}:${minutes}:${seconds} GMT${timezoneSign}${timezoneHours}${timezoneMinutes}`;
 
         document.getElementById("date").innerHTML = formattedDate;
         document.getElementById("time").innerHTML = formattedTime;
-    }
+      }
 
-    setInterval(updateTime, 1000);
-    updateTime();
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const textElements = document.querySelectorAll('.text');
+      setInterval(updateTime, 1000);
+      updateTime();
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const textElements = document.querySelectorAll(".text");
         const isMobile = window.innerWidth < 1200;
 
         // Initialize text animations
-        textElements.forEach(textElement => {
-            const text = textElement.textContent;
-            textElement.innerHTML = ''; // Clear the text content
+        textElements.forEach((textElement) => {
+          const text = textElement.textContent;
+          textElement.innerHTML = ""; // Clear the text content
 
-            text.split('').forEach((letter, index) => {
-                const span = document.createElement('span');
-                span.textContent = letter;
-                span.style.transitionDelay = `${index * 0.05}s`;
-                textElement.appendChild(span);
-            });
+          text.split("").forEach((letter, index) => {
+            const span = document.createElement("span");
+            span.textContent = letter;
+            span.style.transitionDelay = `${index * 0.05}s`;
+            textElement.appendChild(span);
+          });
         });
 
         // Handle mobile/desktop views
         if (!isMobile) {
-            document.querySelectorAll('.trail').forEach((trail) => {
-                trail.addEventListener('click', function() {
-                    // Add a class to keep the dot in its final position
-                    this.classList.add('dot-stuck');
+          document.querySelectorAll(".trail").forEach((trail) => {
+            trail.addEventListener("click", function () {
+              // Add a class to keep the dot in its final position
+              this.classList.add("dot-stuck");
 
-                    // Calculate the final position of the red dot
-                    const dot = this.querySelector('.dot');
+              // Calculate the final position of the red dot
+              const dot = this.querySelector(".dot");
 
-                    // Define sizes for the new dots
-                    const sizes = [400, 1200, 2000, 2800, 3600, 4400];
-                    const newDots = []; // Array to keep track of new dots
+              // Define sizes for the new dots
+              const sizes = [400, 1200, 2000, 2800, 3600, 4400];
+              const newDots = []; // Array to keep track of new dots
 
-                    sizes.forEach((size, index) => {
-                        const newDot = document.createElement('div');
-                        newDot.classList.add('new-dot', `new-dot-${index + 1}`);
-                        newDot.style.position = 'absolute';
-                        newDot.style.width = `${size}px`;
-                        newDot.style.height = `${size}px`;
+              sizes.forEach((size, index) => {
+                const newDot = document.createElement("div");
+                newDot.classList.add("new-dot", `new-dot-${index + 1}`);
+                newDot.style.position = "absolute";
+                newDot.style.width = `${size}px`;
+                newDot.style.height = `${size}px`;
 
-                        // no idea why this works
-                        const dotRect = dot.getBoundingClientRect();
-                        const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
-                        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                // no idea why this works
+                const dotRect = dot.getBoundingClientRect();
+                const scrollLeft =
+                  window.scrollX || document.documentElement.scrollLeft;
+                const scrollTop =
+                  window.scrollY || document.documentElement.scrollTop;
 
-                        newDot.style.left = `${dotRect.left + scrollLeft + dotRect.width / 2 - size / 2}px`;
-                        newDot.style.top = `${dotRect.top + scrollTop + dotRect.height / 2 - size / 2}px`;
+                newDot.style.left = `${
+                  dotRect.left + scrollLeft + dotRect.width / 2 - size / 2
+                }px`;
+                newDot.style.top = `${
+                  dotRect.top + scrollTop + dotRect.height / 2 - size / 2
+                }px`;
 
-                        // Delay the appearance of each dot
-                        setTimeout(() => {
-                            document.body.appendChild(newDot);
-                            newDots.push(newDot); // Add dot to the array
-                        }, index * 200);
-                    });
+                // Delay the appearance of each dot
+                setTimeout(() => {
+                  document.body.appendChild(newDot);
+                  newDots.push(newDot); // Add dot to the array
+                }, index * 200);
+              });
 
-                    // After all dots have appeared, change their colors and then redirect
-                    setTimeout(() => {
-                        newDots.forEach((dot, index) => {
-                            setTimeout(() => {
-                                dot.style.backgroundColor = "#056CC1"; // Change color of each dot
-                            }, index * 200);
-                        });
-
-                        // Redirect to a new page after colors have changed
-                        setTimeout(() => {
-                            const projectId = this.getAttribute("url");
-                            window.location.href = `${projectId}.html`;
-                        }, newDots.length * 200 + 200); // Extra delay before redirecting
-
-                        setTimeout(() => {
-                            newDots.forEach(dot => dot.remove());
-                            document.querySelectorAll('.dot-stuck').forEach(dot => dot.classList.remove('dot-stuck'));
-                        }, sizes.length * 200 + 1000); // this is al little fucked
-                    }, sizes.length * 200 + 200); // Wait until all dots have appeared
+              // After all dots have appeared, change their colors and then redirect
+              setTimeout(() => {
+                newDots.forEach((dot, index) => {
+                  setTimeout(() => {
+                    dot.style.backgroundColor = "#056CC1"; // Change color of each dot
+                  }, index * 200);
                 });
+
+                // Redirect to a new page after colors have changed
+                setTimeout(() => {
+                  const projectId = this.getAttribute("url");
+                  window.location.href = `${projectId}.html`;
+                }, newDots.length * 200 + 200); // Extra delay before redirecting
+
+                setTimeout(() => {
+                  newDots.forEach((dot) => dot.remove());
+                  document
+                    .querySelectorAll(".dot-stuck")
+                    .forEach((dot) => dot.classList.remove("dot-stuck"));
+                }, sizes.length * 200 + 1000); // this is al little fucked
+              }, sizes.length * 200 + 200); // Wait until all dots have appeared
             });
+          });
         } else {
-            // Mobile-specific setup
-            document.querySelectorAll('.trail').forEach(trail => {
-                trail.style.display = 'none';
-            });
-            
-            document.querySelectorAll('.dot.small').forEach(dot => {
-                dot.style.display = 'block';
-                dot.style.position = 'relative';
-                dot.style.margin = '20px auto';
+          // Mobile-specific setup
+          document.querySelectorAll(".trail").forEach((trail) => {
+            trail.style.display = "none";
+          });
 
-            });
+          document.querySelectorAll(".dot.small").forEach((dot) => {
+            dot.style.display = "block";
+            dot.style.position = "relative";
+            dot.style.margin = "20px auto";
+          });
 
-            // Mobile scroll handler
-            let lastScrollTop = 0;
-            window.addEventListener('scroll', () => {
-                const scrollTop = window.scrollY || document.documentElement.scrollTop;
-                const scrollPercentage = (scrollTop / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-                const rotation = scrollPercentage * 3.6;
-                let multi = 1;
-                
-                document.querySelectorAll('.spinning-text-small').forEach((element) => {
-                    element.style.transform = `rotate(${rotation * multi}deg)`;
-                    multi *= 1.4;
+          // Mobile scroll handler
+          let lastScrollTop = 0;
+          window.addEventListener("scroll", () => {
+            const scrollTop =
+              window.scrollY || document.documentElement.scrollTop;
+            const scrollPercentage =
+              (scrollTop /
+                (document.documentElement.scrollHeight - window.innerHeight)) *
+              100;
+            const rotation = scrollPercentage * 3.6;
+            let multi = 1;
+
+            document
+              .querySelectorAll(".spinning-text-small")
+              .forEach((element) => {
+                element.style.transform = `rotate(${rotation * multi}deg)`;
+                multi *= 1.4;
+              });
+
+            lastScrollTop = scrollTop;
+          });
+
+          document.querySelectorAll(".dot.small").forEach((dot) => {
+            dot.addEventListener("click", function () {
+              const projectId = this.getAttribute("url");
+
+              // Create expanding circles animation
+              const sizes = [150, 300, 450, 600, 750, 900];
+              const newDots = [];
+
+              sizes.forEach((size, index) => {
+                const newDot = document.createElement("div");
+                newDot.classList.add("new-dot", `new-dot-${index + 1}`);
+                newDot.style.position = "fixed";
+                newDot.style.width = `${size}px`;
+                newDot.style.height = `${size}px`;
+
+                const dotRect = this.getBoundingClientRect();
+                newDot.style.left = `${
+                  dotRect.left + dotRect.width / 2 - size / 2
+                }px`;
+                newDot.style.top = `${
+                  dotRect.top + dotRect.height / 2 - size / 2
+                }px`;
+
+                setTimeout(() => {
+                  document.body.appendChild(newDot);
+                  newDots.push(newDot);
+                }, index * 100);
+              });
+
+              // Change colors and redirect
+              setTimeout(() => {
+                newDots.forEach((dot, index) => {
+                  setTimeout(() => {
+                    dot.style.backgroundColor = "#056CC1";
+                  }, index * 100);
                 });
-                
-                lastScrollTop = scrollTop;
-            });
 
-            document.querySelectorAll('.dot.small').forEach((dot) => {
-                dot.addEventListener('click', function() {
-                    const projectId = this.getAttribute("url");
-                    
-                    // Create expanding circles animation
-                    const sizes = [150, 300, 450, 600, 750, 900];
-                    const newDots = [];
-                    
-                    sizes.forEach((size, index) => {
-                        const newDot = document.createElement('div');
-                        newDot.classList.add('new-dot', `new-dot-${index + 1}`);
-                        newDot.style.position = 'fixed';
-                        newDot.style.width = `${size}px`;
-                        newDot.style.height = `${size}px`;
-                        
-                        const dotRect = this.getBoundingClientRect();
-                        newDot.style.left = `${dotRect.left + dotRect.width / 2 - size / 2}px`;
-                        newDot.style.top = `${dotRect.top + dotRect.height / 2 - size / 2}px`;
-                        
-                        setTimeout(() => {
-                            document.body.appendChild(newDot);
-                            newDots.push(newDot);
-                        }, index * 100);
-                    });
-                    
-                    // Change colors and redirect
-                    setTimeout(() => {
-                        newDots.forEach((dot, index) => {
-                            setTimeout(() => {
-                                dot.style.backgroundColor = "#056CC1";
-                            }, index * 100);
-                        });
-                        
-                        setTimeout(() => {
-                            window.location.href = `${projectId}.html`;
-                        }, sizes.length * 100 + 200);
-                        
-                        setTimeout(() => {
-                            newDots.forEach(dot => dot.remove());
-                        }, sizes.length * 100 + 1000);
-                    }, sizes.length * 100);
-                });
+                setTimeout(() => {
+                  window.location.href = `${projectId}.html`;
+                }, sizes.length * 100 + 200);
+
+                setTimeout(() => {
+                  newDots.forEach((dot) => dot.remove());
+                }, sizes.length * 100 + 1000);
+              }, sizes.length * 100);
             });
+          });
         }
 
         // Handle window resize
-        window.addEventListener('resize', () => {
-            if (window.innerWidth >= 1200 && isMobile) {
-                window.location.reload();
-            } else if (window.innerWidth < 1200 && !isMobile) {
-                window.location.reload();
-            }
+        window.addEventListener("resize", () => {
+          if (window.innerWidth >= 1200 && isMobile) {
+            window.location.reload();
+          } else if (window.innerWidth < 1200 && !isMobile) {
+            window.location.reload();
+          }
         });
-    });
-</script>
-</body>
+      });
+    </script>
+  </body>
 </html>

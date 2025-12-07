@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>About - Nicolas Mallinckrodt</title>
+    <link rel="stylesheet" href="project.css">
+    <link rel="stylesheet" href="https://use.typekit.net/jlz2zhe.css">
+    <link rel="icon" type="image/x-icon" href="util/favicon.ico">
+    <style>
+        .about-section {
+            margin-bottom: 3em;
+        }
+        .about-title {
+            font-size: 1.5em;
+            opacity: 0.8;
+            margin-bottom: 0.5em;
+        }
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1em;
+            margin-top: 1em;
+        }
+        .skill-tag {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.5em 1.2em;
+            border-radius: 2em;
+            font-size: 1.2em;
+        }
+        .contact-dots {
+            display: flex;
+            gap: 2em;
+            flex-wrap: wrap;
+            margin-top: 1em;
+            justify-content: flex-start;
+        }
+        .link-dot {
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        @media screen and (max-width: 768px) {
+            .skill-tag {
+                font-size: 1em;
+                padding: 0.4em 0.8em;
+            }
+            .contact-dots {
+                gap: 1em;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="text-block">
+        <div class="top-text">
+            <span class="name">nicolas</span>
+            <span class="time" id="time">12:16</span>
+        </div>
+        <div class="divider"></div>
+        <div class="bottom-text">
+            <span class="inverted name">mallinckrodt</span>
+            <span class="inverted date" id="date">26.08.2024</span>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="heading-container">
+        <div class="dot smoll yellow" id="index">
+            <span class="spinning-text spinning-text-small">BACK</span>
+        </div>
+        <h1>About</h1>
+    </div>
+    <section class="project-content">
+        <p>Loading...</p>
+    </section>
+</div>
+<div class="dot red small" url="projects" id="projects">
+    <span class="spinning-text spinning-text-small">Projects</span>
+</div>
+<div class="dot red small" url="writing" id="writing">
+    <span class="spinning-text spinning-text-small">Writing</span>
+</div>
+<div class="dot red small" url="about" id="about">
+    <span class="spinning-text spinning-text-small">About</span>
+</div>
+<script>
+    function updateTime() {
+        const now = new Date();
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const year = now.getFullYear();
+        const formattedDate = `${day}.${month}.${year}`;
+
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const timezoneOffset = now.getTimezoneOffset();
+        const timezoneHours = String(Math.abs(timezoneOffset) / 60).padStart(2, '0');
+        const timezoneMinutes = String(Math.abs(timezoneOffset) % 60).padStart(2, '0');
+        const timezoneSign = timezoneOffset > 0 ? '-' : '+';
+        const formattedTime = `${hours}:${minutes}:${seconds} GMT${timezoneSign}${timezoneHours}${timezoneMinutes}`;
+
+        document.getElementById("date").innerHTML = formattedDate;
+        document.getElementById("time").innerHTML = formattedTime;
+    }
+
+    setInterval(updateTime, 1000);
+    updateTime();
+</script>
+<script>
+    /**
+     * Initializes click handlers for navigation dots
+     */
+    function initDotNavigation() {
+        document.querySelectorAll('.dot').forEach((dot) => {
+            // Skip if already has listener
+            if (dot.dataset.hasListener) return;
+            dot.dataset.hasListener = 'true';
+            
+            dot.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                this.classList.add('dot-big');
+                
+                const route = this.id;
+                const url = this.getAttribute('url');
+                const linkUrl = this.dataset.linkUrl;
+                
+                setTimeout(() => {
+                    if (route === 'index') {
+                        window.location.href = 'index.html';
+                    } else if (url) {
+                        window.location.href = `${route}.html`;
+                    } else if (linkUrl) {
+                        window.open(linkUrl, '_blank');
+                    } else if (route) {
+                        window.location.href = `https://${route}`;
+                    }
+                    
+                    setTimeout(() => {
+                        this.classList.remove('dot-big');
+                    }, 800);
+                }, 400);
+            });
+        });
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', initDotNavigation);
+
+    // Add scroll-based spinning animation for mobile
+    if (window.innerWidth < 1200) {
+        window.addEventListener('scroll', () => {
+            const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            const rotation = scrollPercentage * 3.6;
+            let multi = 1;
+            document.querySelectorAll('.spinning-text-small').forEach((element) => {
+                element.style.transform = `rotate(${rotation*multi}deg)`;
+                multi*=1.4;
+            });
+        });
+    }
+</script>
+<script>
+const API_URL = 'https://nicolas-py.github.io/portfolio-provider/api/portfolio.json';
+
+/**
+ * Checks if a URL or email is a placeholder/example
+ * @param {string} value - The URL or email to check
+ * @returns {boolean} True if it's a valid (non-placeholder) value
+ */
+function isValidContact(value) {
+    if (!value) return false;
+    const placeholders = ['example.com', 'placeholder', 'test.com', 'sample.com'];
+    return !placeholders.some(p => value.toLowerCase().includes(p));
+}
+
+/**
+ * Creates a contact dot element
+ * @param {string} url - The URL to link to
+ * @param {string} label - The label text
+ * @param {string} colorClass - The color class (red or yellow)
+ * @returns {HTMLElement} The dot element
+ */
+function createContactDot(url, label, colorClass = 'red') {
+    const dotElement = document.createElement('div');
+    dotElement.className = `dot smoll ${colorClass} link-dot`;
+    dotElement.dataset.linkUrl = url;
+
+    const span = document.createElement('span');
+    span.className = 'spinning-text spinning-text-small';
+    span.textContent = label;
+    dotElement.appendChild(span);
+
+    return dotElement;
+}
+
+/**
+ * Fetches about data from the API and renders it
+ */
+async function loadAbout() {
+    const container = document.querySelector('.project-content');
+    
+    try {
+        const response = await fetch(API_URL);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        const about = data.about;
+        
+        if (!about) {
+            container.innerHTML = '<p>No about information found.</p>';
+            return;
+        }
+        
+        container.innerHTML = '';
+        
+        // Name and Title section (only show if data exists)
+        if (about.name || about.title || about.bio) {
+            const introSection = document.createElement('div');
+            introSection.className = 'about-section';
+            
+            if (about.name) {
+                const nameHeading = document.createElement('h2');
+                nameHeading.textContent = about.name;
+                introSection.appendChild(nameHeading);
+            }
+            
+            if (about.title) {
+                const titleP = document.createElement('p');
+                titleP.className = 'about-title';
+                titleP.textContent = about.title;
+                introSection.appendChild(titleP);
+            }
+            
+            if (about.bio) {
+                const bioP = document.createElement('p');
+                bioP.textContent = about.bio;
+                introSection.appendChild(bioP);
+            }
+            
+            container.appendChild(introSection);
+        }
+        
+        // Skills section (only show if skills exist)
+        if (about.skills && about.skills.length > 0) {
+            const skillsSection = document.createElement('div');
+            skillsSection.className = 'about-section';
+            
+            const skillsHeading = document.createElement('h2');
+            skillsHeading.textContent = 'Skills';
+            skillsSection.appendChild(skillsHeading);
+            
+            const skillsContainer = document.createElement('div');
+            skillsContainer.className = 'skills-container';
+            
+            about.skills.forEach(skill => {
+                const skillTag = document.createElement('span');
+                skillTag.className = 'skill-tag';
+                skillTag.textContent = skill;
+                skillsContainer.appendChild(skillTag);
+            });
+            
+            skillsSection.appendChild(skillsContainer);
+            container.appendChild(skillsSection);
+        }
+        
+        // Contact section - using dots instead of links, only show valid contacts
+        if (about.contact) {
+            const hasValidContacts = 
+                isValidContact(about.contact.github) || 
+                isValidContact(about.contact.linkedin) || 
+                isValidContact(about.contact.email);
+            
+            if (hasValidContacts) {
+                const contactSection = document.createElement('div');
+                contactSection.className = 'about-section';
+                
+                const contactHeading = document.createElement('h2');
+                contactHeading.textContent = 'Contact';
+                contactSection.appendChild(contactHeading);
+                
+                const contactDots = document.createElement('div');
+                contactDots.className = 'contact-dots';
+                
+                // GitHub dot
+                if (isValidContact(about.contact.github)) {
+                    const githubDot = createContactDot(about.contact.github, 'GitHub', 'red');
+                    contactDots.appendChild(githubDot);
+                }
+                
+                // LinkedIn dot
+                if (isValidContact(about.contact.linkedin)) {
+                    const linkedinDot = createContactDot(about.contact.linkedin, 'LinkedIn', 'yellow');
+                    contactDots.appendChild(linkedinDot);
+                }
+                
+                // Email dot
+                if (isValidContact(about.contact.email)) {
+                    const emailDot = createContactDot(`mailto:${about.contact.email}`, 'Email', 'red');
+                    contactDots.appendChild(emailDot);
+                }
+                
+                contactSection.appendChild(contactDots);
+                container.appendChild(contactSection);
+            }
+        }
+        
+        // Re-initialize dot navigation for dynamically added dots
+        initDotNavigation();
+        
+    } catch (error) {
+        console.error('Error loading about:', error);
+        container.innerHTML = '<p>Failed to load about information. Please try again later.</p>';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadAbout);
+</script>
+</body>
+</html>

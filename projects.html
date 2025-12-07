@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Projects - Nicolas Mallinckrodt</title>
+    <link
+      rel="stylesheet"
+      href="project.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.typekit.net/jlz2zhe.css"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="util/favicon.ico"
+    />
+    <style>
+      .dot.red.small {
+        margin-bottom: 2rem;
+      }
+      .project-title {
+        margin: 0;
+      }
+      .status-badge {
+        display: inline-block;
+        font-size: 0.9rem;
+        padding: 0.4em 1em;
+        border-radius: 2em;
+        white-space: nowrap;
+        margin-bottom: 0.5em;
+      }
+      .status-live {
+        background-color: #d1403f;
+      }
+      .status-completed {
+        background-color: #d1403f;
+      }
+      .status-development {
+        background-color: #e0a347;
+      }
+      .project-item {
+        margin-bottom: 2em;
+      }
+      .link-dot {
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+      @media screen and (max-width: 768px) {
+        .status-badge {
+          font-size: 0.75rem;
+          padding: 0.3em 0.8em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="text-block">
+        <div class="top-text">
+          <span class="name">nicolas</span>
+          <span
+            class="time"
+            id="time"
+            >12:16</span
+          >
+        </div>
+        <div class="divider"></div>
+        <div class="bottom-text">
+          <span class="inverted name">mallinckrodt</span>
+          <span
+            class="inverted date"
+            id="date"
+            >26.08.2024</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="heading-container">
+        <div
+          class="dot smoll yellow"
+          id="index"
+        >
+          <span class="spinning-text spinning-text-small">BACK</span>
+        </div>
+        <h1>Projects</h1>
+      </div>
+      <section class="project-content">
+        <p>Loading projects...</p>
+      </section>
+      <div class="dots">
+        <div
+          class="dot red"
+          id="github.com/Nicolas-Py"
+        >
+          <span class="spinning-text">Github</span>
+        </div>
+        <div
+          class="dot yellow"
+          id="nicolas-py.github.io/portfolio-b"
+        >
+          <span class="spinning-text">Home</span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="dot red small"
+      url="projects"
+      id="projects"
+    >
+      <span class="spinning-text spinning-text-small">Projects</span>
+    </div>
+    <div
+      class="dot red small"
+      url="writing"
+      id="writing"
+    >
+      <span class="spinning-text spinning-text-small">Writing</span>
+    </div>
+    <div
+      class="dot red small"
+      url="about"
+      id="about"
+    >
+      <span class="spinning-text spinning-text-small">About</span>
+    </div>
+    <script>
+      function updateTime() {
+        const now = new Date();
+        const day = String(now.getDate()).padStart(2, "0");
+        const month = String(now.getMonth() + 1).padStart(2, "0");
+        const year = now.getFullYear();
+        const formattedDate = `${day}.${month}.${year}`;
+
+        const hours = String(now.getHours()).padStart(2, "0");
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        const seconds = String(now.getSeconds()).padStart(2, "0");
+        const timezoneOffset = now.getTimezoneOffset();
+        const timezoneHours = String(Math.abs(timezoneOffset) / 60).padStart(
+          2,
+          "0"
+        );
+        const timezoneMinutes = String(Math.abs(timezoneOffset) % 60).padStart(
+          2,
+          "0"
+        );
+        const timezoneSign = timezoneOffset > 0 ? "-" : "+";
+        const formattedTime = `${hours}:${minutes}:${seconds} GMT${timezoneSign}${timezoneHours}${timezoneMinutes}`;
+
+        document.getElementById("date").innerHTML = formattedDate;
+        document.getElementById("time").innerHTML = formattedTime;
+      }
+
+      setInterval(updateTime, 1000);
+      updateTime();
+    </script>
+    <script>
+      /**
+       * Initializes click handlers for navigation dots
+       */
+      function initDotNavigation() {
+        document.querySelectorAll(".dot").forEach((dot) => {
+          // Skip if already has listener
+          if (dot.dataset.hasListener) return;
+          dot.dataset.hasListener = "true";
+
+          dot.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            this.classList.add("dot-big");
+
+            const route = this.id;
+            const url = this.getAttribute("url");
+            const linkUrl = this.dataset.linkUrl;
+
+            setTimeout(() => {
+              if (route === "index") {
+                window.location.href = "index.html";
+              } else if (url) {
+                window.location.href = `${route}.html`;
+              } else if (linkUrl) {
+                window.open(linkUrl, "_blank");
+              } else if (route) {
+                window.location.href = `https://${route}`;
+              }
+
+              setTimeout(() => {
+                this.classList.remove("dot-big");
+              }, 800);
+            }, 400);
+          });
+        });
+      }
+
+      // Initialize on page load
+      document.addEventListener("DOMContentLoaded", initDotNavigation);
+
+      // Add scroll-based spinning animation for mobile
+      if (window.innerWidth < 1200) {
+        window.addEventListener("scroll", () => {
+          const scrollPercentage =
+            (window.scrollY /
+              (document.documentElement.scrollHeight - window.innerHeight)) *
+            100;
+          const rotation = scrollPercentage * 3.6;
+          let multi = 1;
+          document
+            .querySelectorAll(".spinning-text-small")
+            .forEach((element) => {
+              element.style.transform = `rotate(${rotation * multi}deg)`;
+              multi *= 1.4;
+            });
+        });
+      }
+    </script>
+    <script>
+      const API_URL =
+        "https://nicolas-py.github.io/portfolio-provider/api/portfolio.json";
+
+      /**
+       * Converts a number to Roman numeral
+       * @param {number} num - Number to convert
+       * @returns {string} Roman numeral representation
+       */
+      function toRoman(num) {
+        const romanNumerals = [
+          "I",
+          "II",
+          "III",
+          "IV",
+          "V",
+          "VI",
+          "VII",
+          "VIII",
+          "IX",
+          "X",
+          "XI",
+          "XII",
+          "XIII",
+          "XIV",
+          "XV",
+          "XVI",
+          "XVII",
+          "XVIII",
+          "XIX",
+          "XX",
+        ];
+        return romanNumerals[num - 1] || num.toString();
+      }
+
+      /**
+       * Returns the appropriate CSS class for the project status
+       * @param {string} status - The project status
+       * @returns {string} CSS class for the status badge
+       */
+      function getStatusClass(status) {
+        const statusLower = status.toLowerCase();
+        if (statusLower.includes("live")) return "status-live";
+        if (statusLower.includes("completed")) return "status-completed";
+        return "status-development";
+      }
+
+      /**
+       * Creates a link dot element
+       * @param {Object} link - Link object with url and label
+       * @returns {HTMLElement} The dot element
+       */
+      function createLinkDot(link) {
+        const colorClass =
+          link.label.toUpperCase().includes("WEB") ||
+          link.label.toUpperCase().includes("APP")
+            ? "yellow"
+            : "red";
+
+        const dotElement = document.createElement("div");
+        dotElement.className = `dot smoll ${colorClass} link-dot`;
+        dotElement.dataset.linkUrl = link.url;
+
+        const span = document.createElement("span");
+        span.className = "spinning-text spinning-text-small";
+        span.textContent = link.label;
+        dotElement.appendChild(span);
+
+        return dotElement;
+      }
+
+      /**
+       * Fetches projects from the API and renders them
+       */
+      async function loadProjects() {
+        const container = document.querySelector(".project-content");
+
+        try {
+          const response = await fetch(API_URL);
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          const projects = data.projects;
+
+          if (!projects || projects.length === 0) {
+            container.innerHTML = "<p>No projects found.</p>";
+            return;
+          }
+
+          container.innerHTML = "";
+
+          projects.forEach((project, index) => {
+            const projectItem = document.createElement("div");
+            projectItem.className = "project-item";
+
+            // Status badge above the heading
+            const statusBadge = document.createElement("span");
+            statusBadge.className = `status-badge ${getStatusClass(
+              project.status
+            )}`;
+            statusBadge.textContent = project.status;
+            projectItem.appendChild(statusBadge);
+
+            const headingContainer = document.createElement("div");
+            headingContainer.className = "heading-container";
+
+            const h2 = document.createElement("h2");
+            h2.className = "project-title";
+            h2.textContent = `${toRoman(index + 1)}. ${project.title}`;
+            headingContainer.appendChild(h2);
+
+            // Create the link dot
+            if (project.link && project.link.url) {
+              const dotElement = createLinkDot(project.link);
+              headingContainer.appendChild(dotElement);
+            }
+
+            projectItem.appendChild(headingContainer);
+
+            const p = document.createElement("p");
+            p.textContent = project.description;
+            projectItem.appendChild(p);
+
+            container.appendChild(projectItem);
+          });
+
+          // Re-initialize dot navigation for dynamically added dots
+          initDotNavigation();
+        } catch (error) {
+          console.error("Error loading projects:", error);
+          container.innerHTML =
+            "<p>Failed to load projects. Please try again later.</p>";
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", loadProjects);
+    </script>
+  </body>
+</html>
